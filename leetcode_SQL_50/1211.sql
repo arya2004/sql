@@ -1,3 +1,9 @@
-SELECT q.query_name, IFNULL(ROUND(AVG(q.rating/q.position), 2), 0) AS quality, IFNULL(ROUND((SUM(IF(q.rating<3, 1, 0))/COUNT(*))*100, 2), 0) AS poor_query_percentage
-FROM Queries q
-GROUP BY q.query_name;
+-- Compute average query quality and % of poor queries.
+-- quality = rating / position, poor = rating < 3.
+
+SELECT query_name,
+       ROUND(SUM(rating / position) / COUNT(*), 2) AS quality,
+       ROUND(SUM(CASE WHEN rating < 3 THEN 1 ELSE 0 END) * 100 / COUNT(*), 2) AS poor_query_percentage
+FROM Queries
+WHERE query_name IS NOT NULL
+GROUP BY query_name;
