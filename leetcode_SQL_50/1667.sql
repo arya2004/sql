@@ -1,3 +1,7 @@
-SELECT user_id, CONCAT(UPPER(SUBSTR(name, 1, 1)), LOWER(SUBSTR(name, 2, CHAR_LENGTH(name)))) AS name
+-- Problem 1667: Fix Names in a Table
+-- Capitalize the first letter, lowercase the rest
+SELECT 
+    user_id,
+    CONCAT(UPPER(LEFT(name, 1)), LOWER(SUBSTRING(name, 2))) AS name
 FROM Users
 ORDER BY user_id;

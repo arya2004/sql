@@ -1,4 +1,7 @@
 SELECT *
-FROM Cinema c
-WHERE c.id%2 <> 0 AND c.description <> 'boring'
-ORDER BY c.rating DESC;
+FROM Cinema
+WHERE id % 2 = 1         -- Odd IDs
+  AND description != 'boring'  -- Not boring movies
+ORDER BY rating DESC;
+-- Display movies with odd IDs and ratings not equal to 'boring'.
+-- Sort by descending rating.
